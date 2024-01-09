@@ -1,4 +1,4 @@
-function generateDate() {
+function generateData() {
     let data = []
     for (let i = 0; i < getRandomArbitrary(12, 1000); i++) {
         let random = Math.random()
@@ -10,7 +10,6 @@ function generateDate() {
             data.push({color: "red"})
         }
     }
-    console.log(data)
     return data;
 }
 
@@ -46,7 +45,6 @@ function uploadToWebsite(data) {
                 lastDownTime = i * numberOfDaysInLine + j;
             }
         }
-        console.log(green + " " + yellow + " " + red)
 
         if (green > yellow && green > red) {
             carky[i].className = "carka green"
@@ -54,18 +52,51 @@ function uploadToWebsite(data) {
             carky[i].className = "carka yellow"
         } else if (red > green && red > yellow) {
             carky[i].className = "carka red"
-        } else if (green === yellow && green > red) {
-            carky[i].className = "carka yellow"
-        } else if (green === red && green > yellow) {
+        } else if (red > 0) {
             carky[i].className = "carka red"
+        } else if (yellow > 0) {
+            carky[i].className = "carka yellow"
+        } else{
+            carky[i].className = "carka green"
         }
+        /*
+        Červená má přednost protože je více důležité
+        vědět jestli server byl down než jestli byl ok
+        */
+        carky[i].addEventListener("mouseenter", () => {
+            let span = document.createElement("span")
+            span.className = "info"
+            span.innerHTML = `<p>Server down ${red}</p>` +
+                `<p>Warning ${yellow}</p>` +
+                `<p>All good ${green}</p>`;
+            carky[i].appendChild(span)
+        })
+        
+        carky[i].addEventListener("mouseleave", () => {
+            let span = document.querySelector(".info")
+            span.remove()
+        })
+        
     }
     document.getElementById("lastDownTime").innerText = "Last downtime: " + (data.length - lastDownTime) + " days ago"
+    
+    if (lastDownTime === 0) {
+        document.getElementById("lastDownTime").innerText = "Last downtime: Never"
+    }
+    
+    document.getElementById("days").innerText = "Total days: " + data.length
 }
 
-uploadToWebsite(generateDate())
+uploadToWebsite(generateData())
+let isAlertDisplayed = false
 
 function alert() {
+    if (isAlertDisplayed) {
+        return; // If alert is already displayed, do nothing
+    }
+
+    isAlertDisplayed = true;
+    
     let alert = document.createElement("div")
     alert.className = "alert"
     alert.innerHTML = '<span>ℹ️🥸 There was some problem idk</span>'
@@ -77,9 +108,15 @@ function alert() {
         alert.style.animation = 'fadeOutDown 1s ease forwards';
         setTimeout(() => {
             alert.remove()
+            isAlertDisplayed = false;
         }, 1000);
     }, 2000);
 }
 
 let button = document.getElementById("alert")
 button.addEventListener("click", alert)
+
+let buttonRefresh = document.getElementById("refresh")
+buttonRefresh.addEventListener("click", () => {
+    uploadToWebsite(generateData())
+})

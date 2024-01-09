@@ -13,9 +13,10 @@ body{
 nav {
     display: flex;
     justify-content: space-between;
-    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 1px 0 inset, rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0 30px 60px -30px;
     align-items: center;
     padding-right: 20px;
+    padding-bottom: 10px;
     background: white;
 }
 
@@ -23,26 +24,30 @@ h1 {
     padding: 20px;
     font-size: 30px;
 }
-button{
-
+button {
     display: inline-block;
-    outline: none;
-    cursor: pointer;
     font-size: 16px;
     line-height: 20px;
     font-weight: 600;
-    border-radius: 8px;
     padding: 13px 23px;
     border: 1px solid #222222;
     transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
     background: #fff;
     color: #222222;
     margin: 4px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 9px #999;
 }
 
 button:hover {
     border-color: #000000;
     background: #f7f7f7;
+}
+
+button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 main{
@@ -81,6 +86,19 @@ main section span:nth-child(2){
     justify-content: stretch;
     margin: 20px;
     gap: 4px;
+    position: relative;
+}
+
+p:nth-child(1){
+    color: #d90000;
+}
+
+p:nth-child(2){
+    color: #d3b701;
+}
+
+p:nth-child(3){
+    color: #286701;
 }
 
 .green{
@@ -100,9 +118,10 @@ main section span:nth-child(2){
 }
 
 .carka{
-    height: 6px;
+    height: 14px;
     border-radius: 10px;
     width: 100%;
+    position: relative;
 }
 
 @keyframes fadeOutDown {
@@ -151,4 +170,19 @@ main section span:nth-child(2){
 .alert span{
     font-size: 20px;
     color: white;
+}
+
+.info {
+    position: absolute;
+    top: -110px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f7f7f7;
+    width: max-content;
+    border-radius: 20px;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
 }
