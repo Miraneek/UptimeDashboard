@@ -1,3 +1,3 @@
 # Dashboard
 
-Ukol byl vytvořit dashboard ktery bude pracovat s random vygenerovanými daty
+The task was to create a dashboard that will work with randomly generated data
